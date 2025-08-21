@@ -13,11 +13,13 @@ import lombok.NoArgsConstructor;
 @Data
 public class ClienteModel {
 
-    @Id
+
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Id
     private String nome;
+
     private String cpf;
     private int senha;
 }
