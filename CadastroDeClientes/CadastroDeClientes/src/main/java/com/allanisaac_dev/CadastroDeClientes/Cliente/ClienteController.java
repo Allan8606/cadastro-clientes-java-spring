@@ -25,8 +25,13 @@ public class ClienteController {
     }
 
     @GetMapping("/{nome}")
-    public String listarClientePorNome(@PathVariable String nome){
-        return "Listando cliente por nome!" + nome;
+    public ClienteModel listaClientePorNome(@PathVariable String nome){
+        return  clienteService.listaClientePorNome(nome);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deletarClientePorID(@PathVariable Long id){
+        clienteService.deletarClientePorID(id);
     }
 
     @PutMapping
@@ -34,8 +39,5 @@ public class ClienteController {
         return "Editando cliente!";
     }
 
-    @DeleteMapping
-    public String deletarCliente(){
-        return "Deletando cliente!";
-    }
+
 }
