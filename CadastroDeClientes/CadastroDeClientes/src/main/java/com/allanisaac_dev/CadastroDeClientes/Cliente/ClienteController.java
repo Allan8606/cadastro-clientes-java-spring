@@ -15,17 +15,17 @@ public class ClienteController {
     private final ClienteService clienteService;
 
     @PostMapping
-    public ClienteModel cadastrarCliente(@RequestBody ClienteModel clienteModel){
-        return clienteService.cadastrarCliente(clienteModel);
+    public ClienteDTO cadastrarCliente(@RequestBody ClienteDTO clienteDTO){
+        return clienteService.cadastrarCliente(clienteDTO);
     }
 
     @GetMapping
-    public List<ClienteModel> listarTodosCliente(){
+    public List<ClienteDTO> listarTodosCliente(){
         return clienteService.listarTodosClientes();
     }
 
     @GetMapping("/{nome}")
-    public ClienteModel listaClientePorNome(@PathVariable String nome){
+    public List<ClienteDTO> listaClientePorNome(@PathVariable String nome){
         return  clienteService.listaClientePorNome(nome);
     }
 
