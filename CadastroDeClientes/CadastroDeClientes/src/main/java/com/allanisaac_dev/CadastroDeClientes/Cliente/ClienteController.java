@@ -1,43 +1,48 @@
 package com.allanisaac_dev.CadastroDeClientes.Cliente;
 
 
-
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/cliente")
-@RequiredArgsConstructor
+@RequestMapping("/clientes")
 public class ClienteController {
 
-    private final ClienteService clienteService;
+    @Autowired
+    private ClienteService clienteService;
 
-    @PostMapping
-    public ClienteDTO cadastrarCliente(@RequestBody ClienteDTO clienteDTO){
-        return clienteService.cadastrarCliente(clienteDTO);
+
+
+    @GetMapping("/saudacao")
+    public String saudacao() {
+        return "Olá! Bem-vindo ao sistema de cadastro de clientes.";
     }
 
-    @GetMapping
-    public List<ClienteDTO> listarTodosCliente(){
-        return clienteService.listarTodosClientes();
+    @PostMapping("/cadastrar")
+    public ClienteModel cadastrarCliente(@RequestBody ClienteModel clienteModel) {
+        return clienteService.cadastrarCliente(clienteModel);
     }
 
-    @GetMapping("/{nome}")
-    public List<ClienteDTO> listaClientePorNome(@PathVariable String nome){
-        return  clienteService.listaClientePorNome(nome);
+    @GetMapping("/listar")
+    public List<ClienteModel> listarClientes() {
+        return clienteService.listarClientes();
+
     }
 
-    @DeleteMapping("/{id}")
-    public void deletarClientePorID(@PathVariable Long id){
-        clienteService.deletarClientePorID(id);
+    @GetMapping("/listar/{id}")
+    public ClienteModel listarClientePorId(@PathVariable Long id) {
+        return clienteService.listarClientePorId(id);
     }
 
-    @PutMapping
-    public String editarCliente(){
-        return "Editando cliente!";
+    @PutMapping("/atualizar/{id}")
+    public ClienteModel atualizarCliente(@PathVariable Long id, @RequestBody ClienteModel clienteAtualizado){
+        return clienteService.atualizarCliente(id, clienteAtualizado);
     }
 
-
+    @DeleteMapping("/deletar/{id}")
+    public void deletarCliente(@PathVariable Long id) {
+        clienteService.deletarCliente(id);
+    }
 }

@@ -15,12 +15,11 @@ public class ClienteModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    Long id;
+    String nome;
+    String cpf;
+    String telefone;
+    String endereco;
 
-    private String nome;
 
-    private String cpf;
-    private int senha;
 }
-
-
