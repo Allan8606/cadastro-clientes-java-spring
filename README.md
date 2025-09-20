@@ -1,41 +1,78 @@
-# Cadastro de Clientes
+# 📋 Cadastro de Clientes  
 
-Este é um projeto para gerenciar o cadastro de clientes. O sistema foi desenvolvido utilizando Java, Maven e outras ferramentas padrão para projetos dessa natureza. Abaixo está uma descrição geral de como configurar e executar o projeto, bem como um resumo da sua estrutura.
+Sistema simples para gerenciar o **cadastro de clientes**, desenvolvido em **Java** com **Spring Boot** e **Maven**.  
 
+---
 
-## Pré-requisitos
+## 🚀 Tecnologias utilizadas  
+- **Java 17+**  
+- **Spring Boot**  
+  - Spring Web  
+  - Spring Data JPA  
+- **Maven**  
+- **H2 Database**   
+- **Lombok** 
+ 
 
-Antes de executar o projeto, você precisará dos seguintes pré-requisitos:
+---
 
-- **Java**: Certifique-se de ter o JDK instalado em sua máquina. Você pode verificar se o Java está instalado executando o comando:
+## 📦 Pré-requisitos  
 
+Antes de executar o projeto, certifique-se de ter instalado:  
+
+- **Java JDK** → [Download JDK](https://adoptium.net/)  
   ```bash
   java -version
 
-- Maven: O Maven deve ser instalado para compilar o projeto, ou você pode usar o Maven Wrapper (mvnw).
+- Maven (ou utilize o Maven Wrapper incluso no projeto)
 
-## Como Executar
-1. Clone o repositório:
-   
-   ```bash
-   https://github.com/Allan8606/cadastro-clientes-java-spring
+  ```bash
+  mvn -v
 
-2. Compilar o projeto:
 
-   ```bash
-   ./mvnw clean install
+## ▶️ Como executar
+  1. Clone o repositório
 
-3. Executar o projeto:
+     ```bash
+     git clone https://github.com/Allan8606/cadastro-clientes-java-spring
+     cd cadastro-clientes-java-spring
 
-   ```bash
-   ./mvnw spring-boot:run
+  2. Compile o projeto
 
-## Estrutura de Códigos
-  - O código-fonte do projeto está localizado no diretório src/.
-  - O código da aplicação pode ser encontrado no diretório src/main/java/.
-  - O código de testes pode ser encontrado em src/test/java/.
+      ```bash
+      ./mvnw clean install
+     
+  3. Execute a aplicação
 
-#### Desenvolvdo por Allan Issac.
+     ```bash
+     ./mvnw spring-boot:run
+     
+  4. Acesse no navegador
+
+     ```bash
+     http://localhost:8080
+
+## 📂 Estrutura do projeto  
+
+```plaintext
+cadastro-clientes/
+ ├── src/
+ │   ├── main/
+ │   │   ├── java/         # Código-fonte principal
+ │   │   └── resources/    # Configurações (application.properties, etc.)
+ │   └── test/
+ │       └── java/         # Testes automatizados
+ ├── pom.xml               # Configuração do Maven
+ └── README.md             # Documentação do projeto
+````
+
+### 👨‍💻 Autor  
+
+Desenvolvido por **Allan Isaac**  
+
+- 🔗 [LinkedIn](https://www.linkedin.com/in/allanisaac-dev/)  
+- 📧 [Email](mailto:allanisaac.dev@gmail.com)
+
 
 
 
