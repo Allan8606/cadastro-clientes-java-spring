@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Novo Cliente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0,51,102,0.10);
+            padding: 28px 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #FF6600;
+            margin-bottom: 22px;
+            font-size: 1.6em;
+            letter-spacing: 1px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            color: #003366;
+            font-weight: 600;
+            font-size: 1em;
+            margin-bottom: 2px;
+        }
+        input {
+            font-size: 1em;
+            padding: 7px 10px;
+            border-radius: 5px;
+            border: 1px solid #ffe5d0;
+            background: #ffe5d0;
+            margin-bottom: 14px;
+            color: #333;
+        }
+        .actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 18px;
+        }
+        .action-btn {
+            padding: 10px 24px;
+            border-radius: 7px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1em;
+            font-weight: 500;
+            border: none;
+            box-shadow: 0 1px 4px rgba(0,51,102,0.07);
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+        .btn-salvar { background: #FF6600; }
+        .btn-salvar:hover { background: #e65c00; }
+        .btn-voltar { background: #003366; }
+        .btn-voltar:hover { background: #002244; }
+        @media (max-width: 600px) {
+            .container { padding: 10px 4px; }
+            h1 { font-size: 1.1em; }
+            .action-btn { width: 100%; }
+            .actions { flex-direction: column; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Cadastrar Novo Cliente</h1>
+
+    <form th:action="@{/clientes/ui/cadastrar}" th:object="${cliente}" method="post">
+
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" th:field="*{nome}" required />
+
+        <label for="cpf">CPF</label>
+        <input type="text" id="cpf" th:field="*{cpf}" required />
+
+        <label for="telefone">Telefone</label>
+        <input type="text" id="telefone" th:field="*{telefone}" required />
+
+        <label for="endereco">Endereço</label>
+        <input type="text" id="endereco" th:field="*{endereco}" required />
+
+        <div class="actions">
+            <button type="submit" class="action-btn btn-salvar">&#10003; Cadastrar</button>
+            <a class="action-btn btn-voltar" th:href="@{/clientes/ui/listar}">&#8592; Voltar</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

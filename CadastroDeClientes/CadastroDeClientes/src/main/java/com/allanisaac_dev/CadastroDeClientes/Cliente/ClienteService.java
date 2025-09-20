@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClienteService {
@@ -14,29 +15,40 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private ClienteMapper clienteMapper;
+
 
     //Cadastra cliente
-    public ClienteModel cadastrarCliente(ClienteModel clienteModel){
-        return clienteRepository.save(clienteModel);
+    public ClienteDTO cadastrarCliente(ClienteDTO clienteDTO){
+        ClienteModel clienteModel = clienteMapper.map(clienteDTO);
+        clienteModel = clienteRepository.save(clienteModel);
+        return clienteMapper.map(clienteModel);
     }
 
 
     //Lista todos os clientes
-    public List<ClienteModel> listarClientes(){
-        return clienteRepository.findAll();
+    public List<ClienteDTO> listarClientes(){
+        List<ClienteModel> clientesModel = clienteRepository.findAll();
+        return clientesModel.stream()
+                .map(clienteMapper::map)
+                .collect(Collectors.toList());
     }
 
     //Lista cliente por ID
-    public ClienteModel listarClientePorId(Long id){
+    public ClienteDTO listarClientePorId(Long id){
         Optional<ClienteModel> cliente = clienteRepository.findById(id);
-        return cliente.orElse(null);
+        return cliente.map(clienteMapper::map).orElse(null);
     }
 
     //Editar/Atualiza cliente por ID
-    public ClienteModel atualizarCliente(Long id, ClienteModel clienteAtualizado){
-        if (clienteRepository.existsById(id)){
-            clienteAtualizado.setId(id);
-            return clienteRepository.save(clienteAtualizado);
+    public ClienteDTO atualizarCliente(Long id, ClienteDTO clienteDTO){
+        Optional<ClienteModel> clienteExistente = clienteRepository.findById(id);
+        if (clienteExistente.isPresent()){
+            ClienteModel clienteModel = clienteMapper.map(clienteDTO);
+            clienteModel.setId(id);
+            ClienteModel clienteSalvo = clienteRepository.save(clienteModel);
+            return clienteMapper.map(clienteSalvo);
         }
         return null;
 

@@ -1,0 +1,106 @@
+<!-- src/main/resources/templates/detalhesCliente.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes do Cliente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 400px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 2px 16px rgba(0,51,102,0.10);
+            padding: 28px 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #FF6600;
+            margin-bottom: 22px;
+            font-size: 1.6em;
+            letter-spacing: 1px;
+        }
+        .info-group {
+            margin-bottom: 14px;
+        }
+        .label {
+            color: #003366;
+            font-weight: 600;
+            font-size: 1em;
+            margin-bottom: 2px;
+            display: block;
+        }
+        .value {
+            color: #333;
+            font-size: 1.05em;
+            background: #ffe5d0;
+            border-radius: 5px;
+            padding: 7px 10px;
+            margin-bottom: 1px;
+            word-break: break-word;
+        }
+        .actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 28px;
+        }
+        .action-btn {
+            padding: 10px 28px;
+            border-radius: 7px;
+            text-decoration: none;
+            color: #fff;
+            background: #003366;
+            font-size: 1em;
+            font-weight: 500;
+            border: none;
+            box-shadow: 0 1px 4px rgba(0,51,102,0.07);
+            transition: background 0.2s;
+        }
+        .action-btn:hover {
+            background: #002244;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 10px 4px; }
+            h1 { font-size: 1.1em; }
+            .action-btn { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Detalhes do Cliente</h1>
+    <div class="info-group">
+        <span class="label">ID</span>
+        <span class="value" th:text="${cliente.id}"></span>
+    </div>
+    <div class="info-group">
+        <span class="label">Nome</span>
+        <span class="value" th:text="${cliente.nome}"></span>
+    </div>
+    <div class="info-group">
+        <span class="label">CPF</span>
+        <span class="value" th:text="${cliente.cpf}"></span>
+    </div>
+    <div class="info-group">
+        <span class="label">Telefone</span>
+        <span class="value" th:text="${cliente.telefone}"></span>
+    </div>
+    <div class="info-group">
+        <span class="label">Endereço</span>
+        <span class="value" th:text="${cliente.endereco}"></span>
+    </div>
+    <div class="actions">
+        <a class="action-btn" th:href="@{/clientes/ui/listar}">
+            &#8592; Voltar
+        </a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Clientes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: 0 4px 24px rgba(0,51,102,0.10);
+            padding: 32px;
+        }
+        h1 {
+            text-align: center;
+            color: #FF6600;
+            margin-bottom: 24px;
+            font-size: 2em;
+            letter-spacing: 1px;
+        }
+        .btn-adicionar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            margin: 0 auto 24px auto;
+            padding: 10px 24px;
+            background: #FF6600;
+            color: #fff;
+            border-radius: 7px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.08em;
+            box-shadow: 0 2px 8px rgba(255,102,0,0.10);
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .btn-adicionar:hover {
+            background: #e65c00;
+            box-shadow: 0 4px 16px rgba(255,102,0,0.18);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #f7f7f7;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,51,102,0.07);
+        }
+        th, td {
+            padding: 14px 10px;
+            text-align: left;
+        }
+        th {
+            background: #FF6600;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.05em;
+            border: none;
+        }
+        tr {
+            border-bottom: 1px solid #e0e0e0;
+        }
+        tr:last-child {
+            border-bottom: none;
+        }
+        tr:hover {
+            background: #ffe5d0;
+            transition: background 0.2s;
+        }
+        .actions {
+            display: flex;
+            gap: 8px;
+        }
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #fff;
+            font-size: 0.98em;
+            font-weight: 500;
+            border: none;
+            transition: background 0.2s, box-shadow 0.2s;
+            box-shadow: 0 1px 4px rgba(0,51,102,0.07);
+        }
+        .btn-detalhes { background: #003366; }
+        .btn-detalhes:hover { background: #002244; }
+        .btn-editar { background: #FF6600; }
+        .btn-editar:hover { background: #e65c00; }
+        .btn-deletar { background: #b71c1c; }
+        .btn-deletar:hover { background: #7f1313; }
+        @media (max-width: 700px) {
+            .container { padding: 10px; }
+            th, td { padding: 8px 4px; font-size: 0.97em; }
+            .btn-adicionar { padding: 8px 12px; font-size: 1em; }
+            .actions { flex-direction: column; gap: 6px; }
+            .action-btn { padding: 7px 10px; font-size: 0.95em; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Lista de Clientes</h1>
+    <a class="btn-adicionar" th:href="@{/clientes/ui/cadastrar}">
+        <svg width="20" height="20" fill="none" viewBox="0 0 24 24"><path fill="#fff" d="M12 5v14m7-7H5" stroke="#fff" stroke-width="2" stroke-linecap="round"/></svg>
+        Adicionar Novo Cliente
+    </a>
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Telefone</th>
+            <th>Endereço</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cliente : ${clientes}">
+            <td th:text="${cliente.id}"></td>
+            <td th:text="${cliente.nome}"></td>
+            <td th:text="${cliente.cpf}"></td>
+            <td th:text="${cliente.telefone}"></td>
+            <td th:text="${cliente.endereco}"></td>
+            <td class="actions">
+                <a class="action-btn btn-detalhes" th:href="@{/clientes/ui/listar/{id}(id=${cliente.id})}">
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path fill="#fff" d="M12 5c-7 0-9 7-9 7s2 7 9 7 9-7 9-7-2-7-9-7zm0 12a5 5 0 1 1 0-10 5 5 0 0 1 0 10z"/><circle cx="12" cy="12" r="2.5" fill="#fff"/></svg>
+                    Detalhes
+                </a>
+                <a class="action-btn btn-editar" th:href="@{/clientes/ui/atualizar/{id}(id=${cliente.id})}">
+                    <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path fill="#fff" d="M3 17.25V21h3.75l11.06-11.06-3.75-3.75L3 17.25zm14.71-10.04a1.003 1.003 0 0 0 0-1.42l-2.54-2.54a1.003 1.003 0 0 0-1.42 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+                    Editar
+                </a>
+                <form th:action="@{/clientes/ui/deletar/{id}(id=${cliente.id})}" method="post" style="display:inline;">
+                    <button type="submit" class="action-btn btn-deletar">
+                        <svg width="18" height="18" fill="none" viewBox="0 0 24 24"><path fill="#fff" d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                        Deletar
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
