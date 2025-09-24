@@ -12,6 +12,8 @@ Sistema simples para gerenciar o **cadastro de clientes**, desenvolvido em **Jav
 - **Maven**  
 - **H2 Database**   
 - **Lombok** 
+- **Thymeleaf**
+- **Swagger**
  
 
 ---
